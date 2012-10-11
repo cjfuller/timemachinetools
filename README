@@ -1,0 +1,15 @@
+Time machine tools is a utility for copying data off an Apple time machine backup on a system (e.g. linux) that does not support the type of hard links used for the backup.
+ 
+usage (with install through rubygems):
+ 
+gem install time_machine_tools
+
+tm_copy mountpoint sourcepath destpath
+
+where:
+
+mountpoint is the location to which the backup drive is mounted (e.g. /mnt/my_backup)
+
+sourcepath is the source folder you want to copy, specified relative to mountpoint.  Its contents will be copied, but the folder itself will not.
+
+destpath is the destination folder.  The contents of sourcepath will be copied (including subfolders, which will be copied recursively) into destpath.

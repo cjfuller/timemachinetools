@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'time_machine_tools'
+
+#  usage:
+#       tm_copy mountpoint sourcepath destpath
+#
+#  where mountpoint is the location to which the backup drive is mounted (e.g. /mnt/my_backup)
+#        sourcepath is the source folder you want to copy, specified relative to mountpoint.  Its contents
+#                   will be copied, but the folder itself will not.
+#        destpath is the destination folder.  The contents of sourcepath will be copied (including
+#               subfolders, which will be copied recursively) into destpath.
+#
+
+mount_point = ARGV[0]
+source_path = ARGV[1]
+dest_path = ARGV[2]
+  
+tmc = TimeMachineTools::TMCopier.new(mount_point)
+  
+origin_path = File.join(mount_point, source_path)
+
+tmc.copy_dir(origin_path, dest_path)
+
+
