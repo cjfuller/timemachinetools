@@ -77,11 +77,11 @@ module TimeMachineTools
     # @return           a string containing the path to the actual location of the directory on the backup drive.
     #
     def get_non_linked_dir_path_for_path(path)
-      
+            
       #check if the directory exists (either as an actual directory or hard link) or whether we need to get the parent first
       
       if File.exist?(path) then
-        
+                
         #check first if we can go and get it directly
         
         if File.directory?(path) then
@@ -102,11 +102,11 @@ module TimeMachineTools
       
       #recursively get the parent directory
       
-      split_path = File.split(path)[0]
-      
+      split_path = File.split(path)
+            
       parent_path = get_non_linked_dir_path_for_path(split_path[0])
       
-      get_non_linked_dir_path_for_path(File.join(parent_path, split_path))
+      get_non_linked_dir_path_for_path(File.join(parent_path, split_path[1]))
       
     end
     
@@ -120,7 +120,7 @@ module TimeMachineTools
       p origin_path if $DEBUG
 
       real_dir = get_non_linked_dir_path_for_path(origin_path)
-            
+                        
       unless File.exist?(dest_path) and File.directory?(dest_path) then
       
         Dir.mkdir(dest_path)
